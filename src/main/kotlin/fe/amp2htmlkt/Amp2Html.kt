@@ -3,7 +3,6 @@ package fe.amp2htmlkt
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Node
-import java.io.File
 import java.io.InputStream
 
 
@@ -23,16 +22,16 @@ object Amp2Html {
     private fun parseHtml(document: Document, location: String, referrer: String?): String? {
         val head = document.head()
 
-        val ampLink = head.select("link[rel='amphtml'][href]").firstOrNull()
-        val canonicalLink = head.select("link[rel='canonical'][href]").firstOrNull()
-        val amp = document.select("html[amp],html[⚡]")
+        val ampHref = head.select("link[rel='amphtml'][href]").firstOrNull()?.href()
+        val canonicalHref = head.select("link[rel='canonical'][href]").firstOrNull()?.href()
+        val ampHtml = document.select("html[amp],html[⚡]").firstOrNull()
 
-        if (amp.isNotEmpty() || (ampLink != null && ampLink.href() == location)) {
-            if (canonicalLink != null && canonicalLink.href().isNotEmpty() && !(ampLink != null && ampLink.href() == canonicalLink.href())) {
-                if (canonicalLink.href().isNotEmpty() && canonicalLink.href() != location && canonicalLink.href() != referrer) {
-                    return canonicalLink.href()
-                }
-            }
+        if (ampHref == canonicalHref) {
+            return null
+        }
+
+        if ((ampHtml != null || ampHref == location) && (canonicalHref != location && canonicalHref != referrer)) {
+            return canonicalHref
         }
 
         return null

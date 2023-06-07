@@ -2,7 +2,6 @@ package fe.amp2htmlkt
 
 import fe.httpkt.Request
 import fe.httpkt.util.getGZIPOrDefaultStream
-import fe.httpkt.util.readToString
 import java.net.URI
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,7 +13,8 @@ class TestMain {
         val request = Request()
         val map = mapOf(
             "https://www.bbc.com/portuguese/articles/c0jp9l8k8geo.amp" to "https://www.bbc.com/portuguese/articles/c0jp9l8k8geo",
-            "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828/amp" to "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828"
+            "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828/amp" to "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828",
+            "https://google.com" to null
         )
 
         map.forEach { (ampUrl, expectedCanonical) ->
