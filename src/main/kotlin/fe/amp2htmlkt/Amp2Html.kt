@@ -17,7 +17,7 @@ object Amp2Html {
         stream: InputStream,
         baseUri: String,
         referrer: String? = null,
-    ) = stream.use { parseHtml(Jsoup.parse(it, "utf-8", baseUri), baseUri, referrer) }
+    ) = parseHtml(Jsoup.parse(stream, "utf-8", baseUri), baseUri, referrer)
 
     private fun parseHtml(document: Document, location: String, referrer: String?): String? {
         val head = document.head()
