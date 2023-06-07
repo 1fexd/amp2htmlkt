@@ -22,6 +22,8 @@ dependencies {
     api("com.google.code.gson:gson:2.10.1")
 
     testImplementation(kotlin("test"))
+    testImplementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.34")
+    testImplementation("com.gitlab.grrfe.httpkt:core-java8:13.0.0-alpha.34")
 }
 
 tasks.test {
