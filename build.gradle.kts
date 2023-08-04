@@ -1,9 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.9.0"
     java
-    maven
+    `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
 }
 
@@ -16,20 +14,20 @@ repositories {
 }
 
 dependencies {
-    api("org.jsoup:jsoup:1.16.1")
-
-    api("com.gitlab.grrfe:GSONKtExtensions:2.1.2")
-    api("com.google.code.gson:gson:2.10.1")
+    implementation("org.jsoup:jsoup:1.16.1")
 
     testImplementation(kotlin("test"))
     testImplementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.34")
     testImplementation("com.gitlab.grrfe.httpkt:core-java8:13.0.0-alpha.34")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            version = project.version.toString()
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+            from(components["java"])
+        }
+    }
 }
