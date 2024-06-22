@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.23"
     java
     `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
@@ -14,11 +14,10 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jsoup:jsoup:1.16.1")
+    implementation("org.jsoup:jsoup:1.17.2")
 
     testImplementation(kotlin("test"))
-    testImplementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.34")
-    testImplementation("com.gitlab.grrfe.httpkt:core-java8:13.0.0-alpha.34")
+    testImplementation("fe.httpkt:core")
 }
 
 publishing {

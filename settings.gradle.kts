@@ -1,3 +1,3 @@
+rootProject.name = "amp2html"
 
-rootProject.name = "amp2htmlkt"
-
+includeBuild("../httpkt")

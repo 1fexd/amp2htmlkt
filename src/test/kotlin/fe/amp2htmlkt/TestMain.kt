@@ -1,7 +1,7 @@
 package fe.amp2htmlkt
 
 import fe.httpkt.Request
-import fe.httpkt.util.getGZIPOrDefaultStream
+import fe.httpkt.ext.getGZIPOrDefaultStream
 import java.net.URI
 import kotlin.test.Test
 import kotlin.test.assertEquals
