@@ -10,13 +10,14 @@ version = versioning.info.tag ?: versioning.info.full
 
 repositories {
     mavenCentral()
+    maven(url="https://jitpack.io")
 }
 
 dependencies {
     implementation("org.jsoup:jsoup:1.17.2")
 
     testImplementation(kotlin("test"))
-    testImplementation("fe.httpkt:core")
+    testImplementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.62")
 }
 
 publishing {
