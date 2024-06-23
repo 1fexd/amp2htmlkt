@@ -1,32 +1,31 @@
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm")
     java
-    `maven-publish`
-    id("net.nemerosa.versioning") version "3.1.0"
+    id("net.nemerosa.versioning")
 }
 
-group = "fe.amp2htmlkt"
-version = versioning.info.tag ?: versioning.info.full
+allprojects {
+    apply(plugin = "net.nemerosa.versioning")
+    apply(plugin = "org.gradle.maven-publish")
 
-repositories {
-    mavenCentral()
-    maven(url="https://jitpack.io")
-}
+    if (name != "bom") {
+        apply(plugin = "org.jetbrains.kotlin.jvm")
+    }
 
-dependencies {
-    implementation("org.jsoup:jsoup:1.17.2")
+    repositories {
+        mavenCentral()
+        maven(url = "https://jitpack.io")
+    }
 
-    testImplementation(kotlin("test"))
-    testImplementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.62")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.group.toString()
-            version = project.version.toString()
-
-            from(components["java"])
+    if (name != "bom") {
+        kotlin {
+            jvmToolchain(17)
+            if (name != "testing") {
+                explicitApi()
+            }
         }
     }
+
+    group = "fe.amp2html"
+    version = versioning.info.tag ?: versioning.info.full
 }

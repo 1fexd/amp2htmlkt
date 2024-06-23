@@ -6,18 +6,18 @@ import org.jsoup.nodes.Node
 import java.io.InputStream
 
 
-object Amp2Html {
-    fun getNonAmpLink(
+public object Amp2Html {
+    public fun getNonAmpLink(
         html: String,
         baseUri: String,
         referrer: String? = null,
-    ) = parseHtml(Jsoup.parse(html, baseUri), baseUri, referrer)
+    ): String? = parseHtml(Jsoup.parse(html, baseUri), baseUri, referrer)
 
-    fun getNonAmpLink(
+    public fun getNonAmpLink(
         stream: InputStream,
         baseUri: String,
         referrer: String? = null,
-    ) = parseHtml(Jsoup.parse(stream, "utf-8", baseUri), baseUri, referrer)
+    ): String? = parseHtml(Jsoup.parse(stream, "utf-8", baseUri), baseUri, referrer)
 
     private fun parseHtml(document: Document, location: String, referrer: String?): String? {
         val head = document.head()
